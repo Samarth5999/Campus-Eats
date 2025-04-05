@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CampusEats - Menu</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Arial", sans-serif;
+        background: url("Images/menu_bg.png") no-repeat center center fixed;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .container {
+        background: rgba(255, 255, 255, 0.9);
+        padding: 2rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        text-align: center;
+        width: 80%;
+        max-width: 800px;
+        position: relative;
+        left: -20px;
+      }
+
+      h1 {
+        color: #d63447;
+        font-size: 2.5rem;
+        margin-bottom: 2rem;
+      }
+
+      .card-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1.5rem;
+        justify-content: center;
+      }
+
+      .card {
+        background: white;
+        border-radius: 12px;
+        padding: 1.5rem;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s ease;
+        cursor: pointer;
+        width: 200px;
+      }
+
+      .card:hover {
+        transform: translateY(-5px);
+      }
+
+      .card img {
+        width: 80px;
+        height: 80px;
+        object-fit: contain;
+        margin-bottom: 1rem;
+      }
+
+      .card-title {
+        font-size: 1.2rem;
+        color: #333;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Where do you want to order from?</h1>
+      <div class="card-grid">
+        <div class="card" onclick="location.href='Southern.html'">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/1046/1046784.png"
+            alt="Cafeteria"
+          />
+          <div class="card-title">Southern</div>
+        </div>
+        <div class="card" onclick="location.href='juicebar.html'">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/3184/3184773.png"
+            alt="Juice Bar"
+          />
+          <div class="card-title">Quench</div>
+        </div>
+        <div class="card" onclick="location.href='snacks.html'">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/2965/2965567.png"
+            alt="Snacks Corner"
+          />
+          <div class="card-title">Snapeats</div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

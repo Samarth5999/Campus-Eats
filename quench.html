@@ -2,12 +2,9 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Stylish Menu</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
-      rel="stylesheet"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Quench Menu</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"/>
     <style>
       * {
         margin: 0;
@@ -28,29 +25,13 @@
         align-items: center;
       }
       .cart-summary {
-        background: red;
+        background: black;
         padding: 1rem;
         border-radius: 8px;
         box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
         margin-left: auto;
         position: relative;
         cursor: pointer;
-      }
-      .cart-dropdown {
-        display: none;
-        position: absolute;
-        right: 0;
-        top: 60px;
-        background: black;
-        border: 1px solid #ccc;
-        width: 300px;
-        padding: 1rem;
-        border-radius: 10px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        z-index: 100;
-      }
-      .cart-summary:hover .cart-dropdown {
-        display: block;
       }
       .container {
         padding: 2rem;
@@ -110,16 +91,11 @@
     <header>
       <h1>Quench's Menu</h1>
       <div class="cart-summary">
-        🛒 Cart (<span id="cart-count">0</span>) - ₹<span id="cart-total"
-          >0</span
-        >
-        <div class="cart-dropdown" id="cart-dropdown">
-          <ul id="cart-items" style="list-style: none; padding: 0"></ul>
-          <p>Total: ₹<span id="cart-dropdown-total">0</span></p>
-        </div>
+        🛒 Cart (<span id="cart-count">0</span>) - ₹<span id="cart-total">0</span>
       </div>
     </header>
     <div class="container" id="menu-container"></div>
+
     <script>
       const menuData = {
         Burgers: [
@@ -418,21 +394,14 @@
         ],
       };
 
-      const cart = [];
+
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
       function updateCartUI() {
         document.getElementById("cart-count").textContent = cart.length;
         const total = cart.reduce((sum, item) => sum + item.price, 0);
         document.getElementById("cart-total").textContent = total;
-        document.getElementById("cart-dropdown-total").textContent = total;
-
-        const cartItems = document.getElementById("cart-items");
-        cartItems.innerHTML = "";
-        cart.forEach((item) => {
-          const li = document.createElement("li");
-          li.textContent = `${item.name} - ₹${item.price}`;
-          cartItems.appendChild(li);
-        });
+        localStorage.setItem("cart", JSON.stringify(cart));
       }
 
       function renderItems(section, items) {
@@ -446,13 +415,13 @@
           const div = document.createElement("div");
           div.classList.add("item");
           div.innerHTML = `
-          <img src="${item.image}" alt="${item.name}" />
-          <div class="item-info">
-            <h4>${item.name}</h4>
-            <p>₹${item.price}</p>
-            <button onclick='addToCart(${JSON.stringify(item)})'>Add</button>
-          </div>
-        `;
+            <img src="${item.image}" alt="${item.name}" />
+            <div class="item-info">
+              <h4>${item.name}</h4>
+              <p>₹${item.price}</p>
+              <button onclick='addToCart(${JSON.stringify(item)})'>Add</button>
+            </div>
+          `;
           itemContainer.appendChild(div);
         });
       }
@@ -464,6 +433,12 @@
 
       Object.keys(menuData).forEach((key) => {
         renderItems(key, menuData[key]);
+      });
+
+      updateCartUI();
+
+      document.querySelector('.cart-summary').addEventListener('click', () => {
+        window.location.href = 'cart.html';
       });
     </script>
   </body>
